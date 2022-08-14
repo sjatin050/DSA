@@ -86,13 +86,16 @@ public:
             q1.pop();
             
             string s=v.back();
-            if(s==beginWord){
+            if(s==beginWord)
+            {
                 reverse(v.begin(),v.end());
                 res.push_back(v);
                 continue;
             }
             
-            for(string x:graph[s]){
+            for(string x:graph[s])
+            {
+                // s should be one step away from x .. therefore done the below condition
                 if((dis[x]+1)==dis[s])
                 {
                     v.push_back(x);
