@@ -23,6 +23,7 @@ public:
             {
                 // cycle is detected --> get the length of cycle
                 dfsVisit[x] = 0;
+                // as only one outgoing edge ... so there could me only 1 cycle in a graph .. so just return 
                 return number[cur] - number[x] + 1;    
             }
 
