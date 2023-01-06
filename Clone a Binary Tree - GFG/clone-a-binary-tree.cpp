@@ -62,87 +62,114 @@ struct Node
 
 class Solution{
   public:
-    /* The function should clone the passed tree and return 
-       root of the cloned tree */
+    Node* util(Node* tree, bool isRandom) 
+    {
+        if(tree == NULL)
+        return NULL;
+        
+        Node *clonedNode = new Node(tree->data);
+        
+        if(!isRandom) 
+        {
+            clonedNode->left = util(tree->left, false);
+            clonedNode->right = util(tree->right, false);
+            clonedNode->random = util(tree->random, true);
+        }
+        return clonedNode;
+    }
+    
+    /* The function should clone the passed tree and return
+    root of the cloned tree */
     Node* cloneTree(Node* tree)
     {
-       unordered_map<int,int> mp;
-       unordered_map<int,Node*> mp1;
+        //Your code here
+        if(tree == NULL)
+        return NULL;
+        
+        return util(tree, false);
+    
+    }
+        /* The function should clone the passed tree and return 
+           root of the cloned tree */
+    // Node* cloneTree(Node* tree)
+    // {
+    //   unordered_map<int,int> mp;
+    //   unordered_map<int,Node*> mp1;
        
-       queue<Node*> qori;
-       queue<Node*> qclo;
+    //   queue<Node*> qori;
+    //   queue<Node*> qclo;
        
-       Node *clonehead=new Node(tree->data);
-       mp1[tree->data]=clonehead;
-       qori.push(tree);
-       qclo.push(clonehead);
+    //   Node *clonehead=new Node(tree->data);
+    //   mp1[tree->data]=clonehead;
+    //   qori.push(tree);
+    //   qclo.push(clonehead);
        
-       while(qori.size())
-       {
-           int si=qori.size();
-           for(int i=0;i<si;i++)
-           {
-               auto x1=qori.front();
-               qori.pop();
-               auto x2=qclo.front();
-               qclo.pop();
-               if(x1->left)
-               {
-                   Node* le=new Node(x1->left->data);
-                   x2->left=le;
-                   mp1[x1->left->data]=le;
-                   qori.push(x1->left);
-                   qclo.push(le);
-               }
-               
-               if(x1->right)
-               {
-                   Node* ri=new Node(x1->right->data);
-                   x2->right=ri;
-                   mp1[x1->right->data]=ri;
-                   qori.push(x1->right);
-                   qclo.push(ri);
-               }
-               if(x1->random)
-               {
-                   mp[x1->data]=x1->random->data;
-               }
-               
-               
-           }
-       }
-    //   cout<<mp.size()<<"\n";
-    //   cout<<mp1.size()<<"\n";
-    // now filling all the random pointers
-       for(auto x:mp)
-       {
-           mp1[x.first]->random=mp1[x.second];
-       }
-       
-    //   queue<Node*> q;
-    //   q.push(clonehead);
-    //   while(q.size())
+    //   while(qori.size())
     //   {
-    //       auto x=q.front();
-    //       q.pop();
-    //     //   cout<<x->data<<"-->";
-    //     //   if(x->random)
-    //     //   cout<<x->random->data;
-    //     //   cout<<"\n";
-    //       if(x->left)
+    //       int si=qori.size();
+    //       for(int i=0;i<si;i++)
     //       {
-    //           q.push(x->left);
-    //       }
-    //       if(x->right)
-    //       {
-    //           q.push(x->right);
+    //           auto x1=qori.front();
+    //           qori.pop();
+    //           auto x2=qclo.front();
+    //           qclo.pop();
+    //           if(x1->left)
+    //           {
+    //               Node* le=new Node(x1->left->data);
+    //               x2->left=le;
+    //               mp1[x1->left->data]=le;
+    //               qori.push(x1->left);
+    //               qclo.push(le);
+    //           }
+               
+    //           if(x1->right)
+    //           {
+    //               Node* ri=new Node(x1->right->data);
+    //               x2->right=ri;
+    //               mp1[x1->right->data]=ri;
+    //               qori.push(x1->right);
+    //               qclo.push(ri);
+    //           }
+    //           if(x1->random)
+    //           {
+    //               mp[x1->data]=x1->random->data;
+    //           }
+               
+               
     //       }
     //   }
-       //cout<<"\n";
-       return clonehead;
+    // //   cout<<mp.size()<<"\n";
+    // //   cout<<mp1.size()<<"\n";
+    // // now filling all the random pointers
+    //   for(auto x:mp)
+    //   {
+    //       mp1[x.first]->random=mp1[x.second];
+    //   }
+       
+    // //   queue<Node*> q;
+    // //   q.push(clonehead);
+    // //   while(q.size())
+    // //   {
+    // //       auto x=q.front();
+    // //       q.pop();
+    // //     //   cout<<x->data<<"-->";
+    // //     //   if(x->random)
+    // //     //   cout<<x->random->data;
+    // //     //   cout<<"\n";
+    // //       if(x->left)
+    // //       {
+    // //           q.push(x->left);
+    // //       }
+    // //       if(x->right)
+    // //       {
+    // //           q.push(x->right);
+    // //       }
+    // //   }
+    //   //cout<<"\n";
+    //   return clonehead;
        
        
-    }
+    // }
 };
 
 
